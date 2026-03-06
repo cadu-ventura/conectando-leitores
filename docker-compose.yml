@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # MongoDB - Banco de dados
+  mongodb:
+    image: mongo:7.0-alpine
+    container_name: oraculo-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: oraculo
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    container_name: oraculo-backend
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: mongodb://admin:example@mongodb:27017/oraculo?authSource=admin
+      PORT: 21165
+      JWT_SECRET: your_super_secret_key_min_32_chars_here_123456
+      JWT_EXPIRES_IN: 24h
+      NEXT_PUBLIC_API_URL: http://localhost:21165
+      FIREBASE_PROJECT_ID: example-project
+      FIREBASE_PRIVATE_KEY: example-key
+      FIREBASE_CLIENT_EMAIL: firebase@example.iam.gserviceaccount.com
+    ports:
+      - "21165:21165"
+    networks:
+      - app-network
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: yarn start:dev
+
+  # Frontend (opcional)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: oraculo-frontend
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:21165
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
