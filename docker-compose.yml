@@ -7,8 +7,7 @@ services:
     ports:
       - "21165:21165"
     depends_on:
-      oraculo:
-        condition: service_healthy
+      - oraculo
     environment:
       - NODE_ENV=production
       - DATABASE_URL=${DATABASE_URL:-mongodb://admin:example@oraculo:27017/oraculo?authSource=admin}
@@ -57,12 +56,6 @@ services:
       - app
     mem_limit: 256m
     cpus: "0.3"
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
 
 networks:
   app:
