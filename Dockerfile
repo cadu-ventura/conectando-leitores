@@ -56,5 +56,5 @@ ENV NODE_ENV=production
 # Expõe a porta
 EXPOSE 21165
 
-# Inicia a aplicação
-CMD ["node", "dist/src/main"]
+# Inicia a aplicação (usa start para executar prestart:prod que faz o seed)
+CMD ["npm", "start"]
