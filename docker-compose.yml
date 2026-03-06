@@ -4,28 +4,23 @@ services:
       context: ./backend
       dockerfile: dockerfile
     restart: always
-    env_file:
-      - ./backend/.env
     ports:
-      - "${PORT}:21165"
-      - "4${PORT}:10050"
+      - "21165:21165"
     depends_on:
       oraculo:
         condition: service_healthy
     environment:
-      - NODE_ENV=development
-      - DATABASE_URL=mongodb://admin:example@oraculo:27017/oraculo?authSource=admin
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.${SQUAD_NAME}-backend.loadbalancer.server.port=21165
-      - traefik.http.routers.${SQUAD_NAME}-backend-http.rule=Host(`api-${SQUAD_NAME}.qacoders.dev.br`)
-      - traefik.http.routers.${SQUAD_NAME}-backend-http.entrypoints=web
-      - traefik.http.routers.${SQUAD_NAME}-backend-https.tls=true
-      - traefik.http.routers.${SQUAD_NAME}-backend-https.tls.certresolver=letsencrypt
-      - traefik.http.routers.${SQUAD_NAME}-backend-https.entrypoints=websecure
-      - traefik.http.routers.${SQUAD_NAME}-backend-https.rule=Host(`api-${SQUAD_NAME}.qacoders.dev.br`)
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL:-mongodb://admin:example@oraculo:27017/oraculo?authSource=admin}
+      - JWT_SECRET=${JWT_SECRET:-change_me_in_production}
+      - JWT_EXPIRES_IN=24h
+      - PORT=21165
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+      - FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}
+      - FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}
+      - NODE_OPTIONS=--max-old-space-size=1024
     networks:
-      - traefik
+      - app
     mem_limit: 1g
     cpus: "0.5"
 
@@ -34,23 +29,15 @@ services:
       context: ./frontend
       dockerfile: dockerfile
     restart: always
-    env_file:
-      - ./frontend/.env
     ports:
-      - "1${PORT}:3000"
-      - "3${PORT}:10050"
+      - "3000:3000"
     depends_on:
       - backend
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.${SQUAD_NAME}-frontend-http.rule=Host(`${SQUAD_NAME}.qacoders.dev.br`)
-      - traefik.http.routers.${SQUAD_NAME}-frontend-http.entrypoints=web
-      - traefik.http.routers.${SQUAD_NAME}-frontend-https.tls=true
-      - traefik.http.routers.${SQUAD_NAME}-frontend-https.tls.certresolver=letsencrypt
-      - traefik.http.routers.${SQUAD_NAME}-frontend-https.entrypoints=websecure
-      - traefik.http.routers.${SQUAD_NAME}-frontend-https.rule=Host(`${SQUAD_NAME}.qacoders.dev.br`)
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:21165}
+      - NEXT_PUBLIC_FIREBASE_API_KEY=${NEXT_PUBLIC_FIREBASE_API_KEY}
     networks:
-      - traefik
+      - app
     mem_limit: 128m
     cpus: "0.2"
 
@@ -60,15 +47,14 @@ services:
       dockerfile: dockerfile
     restart: always
     ports:
-      - "2${PORT}:27017"
-      - "5${PORT}:10050" 
+      - "27017:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=example
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-admin}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-example}
     volumes:
-      - /home/joao_gustavo/oraculo:/data/db
+      - mongodb_data:/data/db
     networks:
-      - traefik
+      - app
     mem_limit: 256m
     cpus: "0.3"
     healthcheck:
@@ -79,5 +65,8 @@ services:
       start_period: 30s
 
 networks:
-  traefik:
-    external: true
+  app:
+    driver: bridge
+
+volumes:
+  mongodb_data:
