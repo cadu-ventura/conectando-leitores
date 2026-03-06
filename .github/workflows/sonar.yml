@@ -11,21 +11,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # BACKEND
       - name: Backend - Install dependencies
         working-directory: backend
+        env:
+          LEFTHOOK: 0
         run: yarn install --frozen-lockfile
 
-      - name: Backend - Run tests with coverage
+      - name: Backend - Build
         working-directory: backend
-        run: yarn test:cov || true
+        run: yarn build
 
       # FRONTEND
       - name: Frontend - Install dependencies
         working-directory: frontend
-        run: yarn install --frozen-lockfile
-        
+        run: npm install
+
+      - name: Frontend - Build
+        working-directory: frontend
+        run: npm run build
+
       # SONARQUBE SCAN
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v2
@@ -36,6 +44,5 @@ jobs:
           args: >
             -Dsonar.projectKey=oraculo
             -Dsonar.projectName=Oraculo
-            -Dsonar.modules=backend,frontend
-            
-            -Dsonar.coverage.exclusions=backend/**,frontend/**   
+            -Dsonar.sources=backend/src,frontend/src
+            -Dsonar.exclusions=**/*.spec.ts,**/*.test.ts,**/node_modules/**   
