@@ -21,6 +21,7 @@ RUN yarn install --frozen-lockfile
 
 # Copia o restante do código
 COPY backend/src ./src
+COPY backend/common ./common
 COPY backend/tsconfig.json ./
 COPY backend/tsconfig.build.json ./
 COPY backend/nest-cli.json ./
