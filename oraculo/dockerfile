@@ -1,0 +1,53 @@
+FROM mongo:latest
+WORKDIR /app
+
+# Instala dependências e Zabbix Agent 2
+RUN apt-get update && apt-get install -y wget gnupg supervisor && \
+    wget -4 https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest+ubuntu22.04_all.deb && \
+    dpkg -i zabbix-release_latest+ubuntu22.04_all.deb || true && \
+    apt-get update && apt-get install -y --no-install-recommends zabbix-agent2 && \
+    rm -rf /var/lib/apt/lists/* zabbix-release_latest+ubuntu22.04_all.deb
+
+# Configuração do Zabbix Agent 2
+# NOTA: Os valores abaixo são exemplos. Substitua pelos seus valores reais em produção.
+ARG ZABBIX_SERVER=192.168.1.100
+ARG ZABBIX_SERVER_PORT=10051
+ARG HOSTNAME_EXAMPLE=example-mongodb
+
+RUN mkdir -p /etc/zabbix /var/run/zabbix /var/log/zabbix && \
+    echo "PidFile=/var/run/zabbix/zabbix_agent2.pid" > /etc/zabbix/zabbix_agent2.conf && \
+    echo "LogFile=/var/log/zabbix/zabbix_agent2.log" >> /etc/zabbix/zabbix_agent2.conf && \
+    echo "Server=${ZABBIX_SERVER}" >> /etc/zabbix/zabbix_agent2.conf && \
+    echo "ServerActive=${ZABBIX_SERVER}:${ZABBIX_SERVER_PORT}" >> /etc/zabbix/zabbix_agent2.conf && \
+    echo "Hostname=${HOSTNAME_EXAMPLE}" >> /etc/zabbix/zabbix_agent2.conf && \
+    echo "Plugins.Docker.Endpoint=unix:///var/run/docker.sock" >> /etc/zabbix/zabbix_agent2.conf && \
+    chmod 755 /var/run/zabbix /var/log/zabbix
+
+# Configuração do Supervisor
+RUN echo "[supervisord]" > /etc/supervisord.conf && \
+    echo "nodaemon=true" >> /etc/supervisord.conf && \
+    echo "user=root" >> /etc/supervisord.conf && \
+    echo "" >> /etc/supervisord.conf && \
+    echo "[program:mongodb]" >> /etc/supervisord.conf && \
+    echo "command=/usr/local/bin/docker-entrypoint.sh mongod" >> /etc/supervisord.conf && \
+    echo "autostart=true" >> /etc/supervisord.conf && \
+    echo "autorestart=true" >> /etc/supervisord.conf && \
+    echo "stdout_logfile=/dev/stdout" >> /etc/supervisord.conf && \
+    echo "stdout_logfile_maxbytes=0" >> /etc/supervisord.conf && \
+    echo "stderr_logfile=/dev/stderr" >> /etc/supervisord.conf && \
+    echo "stderr_logfile_maxbytes=0" >> /etc/supervisord.conf && \
+    echo "" >> /etc/supervisord.conf && \
+    echo "[program:zabbix-agent2]" >> /etc/supervisord.conf && \
+    echo "command=/usr/sbin/zabbix_agent2 -f -c /etc/zabbix/zabbix_agent2.conf" >> /etc/supervisord.conf && \
+    echo "autostart=true" >> /etc/supervisord.conf && \
+    echo "autorestart=true" >> /etc/supervisord.conf && \
+    echo "stdout_logfile=/dev/stdout" >> /etc/supervisord.conf && \
+    echo "stdout_logfile_maxbytes=0" >> /etc/supervisord.conf && \
+    echo "stderr_logfile=/dev/stderr" >> /etc/supervisord.conf && \
+    echo "stderr_logfile_maxbytes=0" >> /etc/supervisord.conf
+
+# Expõe as portas
+EXPOSE 27017 10050
+
+# Inicia o Supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --color-primary: #8a05be;
+    --color-secondary: #ba4de3;
+    --color-tertiary: #530082;
+    --color-bg-color-01: #f5f5f5;
+    --color-bg-color-02: #cb98ec33;
+    --color-title-color: #191919;
+    --color-text-color: #434343;
+    --color-success: #39be05;
+    --color-error: #be0539;
+
+    --color-background: var(--color-bg-color-01);
+    --color-foreground: var(--color-text-color);
+    --color-card: #ffffff;
+    --color-card-foreground: var(--color-text-color);
+    --color-popover: #ffffff;
+    --color-popover-foreground: var(--color-text-color);
+    --color-primary-foreground: #ffffff;
+    --color-secondary-foreground: #ffffff;
+    --color-muted: #f1f5f9;
+    --color-muted-foreground: #64748b;
+    --color-accent: var(--color-bg-color-02);
+    --color-accent-foreground: var(--color-primary);
+    --color-destructive: var(--color-error);
+    --color-border: #e2e8f0;
+    --color-input: #e2e8f0;
+    --color-ring: var(--color-primary);
+
+    --font-sans: "Inter", sans-serif;
+    --font-serif: "Playfair Display", serif;
+    --font-dyslexic: "OpenDyslexic", sans-serif;
+
+    --text-size-sm: 14px;
+    --text-size-base: 16px;
+    --text-size-h5: 16px;
+    --text-size-h4: 32px;
+    --text-size-h3: 48px;
+    --text-size-h2: 64px;
+    --text-size-h1: 80px;
+    --text-size-title: 24px;
+}
+.swiper-wrapper {
+    overflow: visible !important;
+}
+.swiper-wrapper {
+    transition-timing-function: linear !important;
+}
+
+.font-slider {
+    /* Reseta a aparência padrão */
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: transparent; /* O trilho será customizado abaixo */
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- O TRILHO (TRACK) --- */
+.font-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background: #f1f5f9; /* bg-slate-100 (cinza claro) */
+    border-radius: 99px;
+}
+.font-slider::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: #f1f5f9;
+    border-radius: 99px;
+}
+
+/* --- O POLEGAR (THUMB) --- */
+/* (Ele vai usar sua variável --color-primary do @theme) */
+.font-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -5px; /* Centraliza o polegar no trilho */
+    height: 16px;
+    width: 16px;
+    background-color: var(--color-primary);
+    border-radius: 99px;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.font-slider::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    background-color: var(--color-primary);
+    border-radius: 99px;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("/fonts/OpenDyslexic-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Remove o "X" padrão do input[type="search"] no Chrome/Safari/Edge */
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+/* Remove o ícone de lupa padrão*/
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}

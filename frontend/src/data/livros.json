@@ -1,0 +1,167 @@
+{
+    "livros": [
+        {
+            "id": "1",
+            "title": "Orgulho e Preconceito",
+            "author": "Jane Austen",
+            "category": "romance",
+            "language": "português",
+            "coverUrl": "/livros/book-case-0.png",
+            "publicationYear": 1813,
+            "rating": 4.8,
+            "reviewCount": 1245,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor.",
+            "subtitulo": [
+                "Ama romance de época com encontros inesperados e diálogos afiados? “Orgulho e Preconceito”, de Jane Austen, é a escolha perfeita.",
+                "Na Inglaterra do século XIX, Elizabeth Bennet e o enigmático Sr. Darcy desafiam convenções e descobrem um amor que vence preconceitos.",
+                "Um clássico atemporal que segue top 1 entre os mais lidos, elegante e irresistível."
+            ]
+        },
+        {
+            "id": "2",
+            "title": "Clarice na cabeceira",
+            "author": "Clarice Lispector",
+            "category": "romance",
+            "language": "português",
+            "coverUrl": "/livros/book-case-1.png",
+            "publicationYear": 2010,
+            "rating": 4.5,
+            "reviewCount": 845,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        },
+        {
+            "id": "3",
+            "title": "Além do planeta silencioso",
+            "author": "C. S. Lewis",
+            "category": "ficção",
+            "language": "português",
+            "coverUrl": "/livros/book-case-2.png",
+            "publicationYear": 1938,
+            "rating": 4.2,
+            "reviewCount": 630,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        },
+        {
+            "id": "4",
+            "title": "Amar se aprende amando",
+            "author": "Carlos Drummond de Andrade",
+            "category": "poesia",
+            "language": "português",
+            "coverUrl": "/livros/book-case-3.png",
+            "publicationYear": 1985,
+            "rating": 4.0,
+            "reviewCount": 210,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        },
+        {
+            "id": "5",
+            "title": "As menores histórias de amor",
+            "author": "Bruno Fontes",
+            "category": "contos",
+            "language": "português",
+            "coverUrl": "/livros/book-case-4.png",
+            "publicationYear": 2020,
+            "rating": 4.3,
+            "reviewCount": 175,
+            "isFavorited": false,
+            "sinopse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        },
+        {
+            "id": "6",
+            "title": "Assassinato no Expresso",
+            "author": "Agatha Christie",
+            "category": "ficção",
+            "language": "português",
+            "coverUrl": "/livros/book-case-5.png",
+            "publicationYear": 1934,
+            "rating": 4.7,
+            "reviewCount": 980,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        }
+    ],
+    "livrosBooktok": [
+        {
+            "id": "13",
+            "title": "Depois daquele verão",
+            "author": "Carley Fortune",
+            "category": "romance",
+            "language": "português",
+            "coverUrl": "/livros/book-case-14.png",
+            "publicationYear": 2021,
+            "rating": 4.2,
+            "reviewCount": 145,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        },
+        {
+            "id": "14",
+            "title": "Pra você que sente demais",
+            "author": "Victor Fernandes",
+            "category": "ficção",
+            "language": "português",
+            "coverUrl": "/livros/book-case-15.png",
+            "publicationYear": 2022,
+            "rating": 4.1,
+            "reviewCount": 98,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        },
+        {
+            "id": "15",
+            "title": "Uma tempestade de verão",
+            "author": "K. L. Walther",
+            "category": "romance",
+            "language": "português",
+            "coverUrl": "/livros/book-case-16.png",
+            "publicationYear": 2020,
+            "rating": 4.0,
+            "reviewCount": 65,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        },
+        {
+            "id": "16",
+            "title": "A mulher em mim",
+            "author": "Britney Spears",
+            "category": "biografia",
+            "language": "português",
+            "coverUrl": "/livros/book-case-17.png",
+            "publicationYear": 2018,
+            "rating": 3.9,
+            "reviewCount": 80,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        },
+        {
+            "id": "17",
+            "title": "A loja dos dias de chuva",
+            "author": "You Yeong-Gwang",
+            "category": "ficção",
+            "language": "português",
+            "coverUrl": "/livros/book-case-18.png",
+            "publicationYear": 2021,
+            "rating": 4.2,
+            "reviewCount": 120,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        },
+        {
+            "id": "18",
+            "title": "Cleopatra e Frankenstein",
+            "author": "Coco Mellors",
+            "category": "romance",
+            "language": "português",
+            "coverUrl": "/livros/book-case-19.png",
+            "publicationYear": 2022,
+            "rating": 4.3,
+            "reviewCount": 135,
+            "isFavorited": false,
+            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor."
+        }
+    ]
+}

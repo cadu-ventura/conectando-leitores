@@ -1,0 +1,20 @@
+# lefthook.yml
+
+assert_lefthook_installed: true
+
+pre-commit:
+  parallel: true
+  commands:
+    # Comando para o FRONTEND
+    frontend-lint:
+      glob: "*.{js,jsx,ts,tsx}"
+      run: yarn lint-staged
+      root: "frontend/"
+
+commit-msg:
+  commands:
+    # O validador de mensagem de commit pode ser o mesmo.
+    # Ele valida a mensagem, que é global para o commit.
+    lint-message:
+      run: yarn commitlint --edit {1}
+      root: "frontend/" # Pode deixar no frontend, não há problema.

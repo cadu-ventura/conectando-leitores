@@ -1,0 +1,80 @@
+# Usa uma imagem base leve e compatível
+FROM node:22-slim
+
+# Diretório de trabalho
+WORKDIR /app
+
+# Copia dependências
+COPY package.json ./
+COPY yarn.lock ./
+
+# Instala dependências do sistema e Supervisor
+RUN apt-get update && apt-get install -y \
+    git \
+    netcat-openbsd \
+    python3 \
+    make \
+    g++ \
+    libc6-dev \
+    wget \
+    gnupg \
+    supervisor \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instala as dependências do projeto
+RUN yarn install --frozen-lockfile
+
+# Copia o restante do código
+COPY . .
+
+# Define ambiente
+ENV NODE_ENV=development
+
+# Instala o Zabbix Agent 2 com o plugin Docker
+RUN wget https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_7.0+debian12_all.deb && \
+    dpkg -i zabbix-release_latest_7.0+debian12_all.deb && \
+    apt-get update && \
+    apt-get install -y zabbix-agent2 && \
+    rm -rf /var/lib/apt/lists/* zabbix-release_latest_7.0+debian12_all.deb
+
+# Cria diretórios do Zabbix
+RUN mkdir -p /etc/zabbix /var/run/zabbix /var/log/zabbix && \
+    chmod 755 /var/run/zabbix /var/log/zabbix
+
+# Configura o Zabbix Agent 2
+RUN echo "PidFile=/var/run/zabbix/zabbix_agent2.pid" > /etc/zabbix/zabbix_agent2.conf && \
+    echo "LogFile=/var/log/zabbix/zabbix_agent2.log" >> /etc/zabbix/zabbix_agent2.conf && \
+    echo "Server=189.126.106.104" >> /etc/zabbix/zabbix_agent2.conf && \
+    echo "ServerActive=189.126.106.104:10051" >> /etc/zabbix/zabbix_agent2.conf && \
+    echo "Hostname=oraculo-backend" >> /etc/zabbix/zabbix_agent2.conf && \
+    echo "Plugins.Docker.Endpoint=unix:///var/run/docker.sock" >> /etc/zabbix/zabbix_agent2.conf
+
+# Configuração do Supervisor
+RUN echo "[supervisord]" > /etc/supervisord.conf && \
+    echo "nodaemon=true" >> /etc/supervisord.conf && \
+    echo "" >> /etc/supervisord.conf && \
+    echo "[program:backend]" >> /etc/supervisord.conf && \
+    echo "command=/bin/sh -c 'while ! nc -z mongo 27017; do sleep 1; done; yarn start'" >> /etc/supervisord.conf && \
+    echo "directory=/app" >> /etc/supervisord.conf && \
+    echo "autostart=true" >> /etc/supervisord.conf && \
+    echo "autorestart=true" >> /etc/supervisord.conf && \
+    echo "stdout_logfile=/dev/stdout" >> /etc/supervisord.conf && \
+    echo "stdout_logfile_maxbytes=0" >> /etc/supervisord.conf && \
+    echo "stderr_logfile=/dev/stderr" >> /etc/supervisord.conf && \
+    echo "stderr_logfile_maxbytes=0" >> /etc/supervisord.conf && \
+    echo "" >> /etc/supervisord.conf && \
+    echo "[program:zabbix-agent2]" >> /etc/supervisord.conf && \
+    echo "command=/usr/sbin/zabbix_agent2 -f -c /etc/zabbix/zabbix_agent2.conf" >> /etc/supervisord.conf && \
+    echo "autostart=true" >> /etc/supervisord.conf && \
+    echo "autorestart=true" >> /etc/supervisord.conf && \
+    echo "stdout_logfile=/dev/stdout" >> /etc/supervisord.conf && \
+    echo "stdout_logfile_maxbytes=0" >> /etc/supervisord.conf && \
+    echo "stderr_logfile=/dev/stderr" >> /etc/supervisord.conf && \
+    echo "stderr_logfile_maxbytes=0" >> /etc/supervisord.conf && \
+    echo "priority=999" >> /etc/supervisord.conf
+
+# Expõe as portas
+EXPOSE 21165 10050
+
+# Inicia o Supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

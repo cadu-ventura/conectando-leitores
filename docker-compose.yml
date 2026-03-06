@@ -1,0 +1,83 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    restart: always
+    env_file:
+      - ./backend/.env
+    ports:
+      - "${PORT}:21165"
+      - "4${PORT}:10050"
+    depends_on:
+      oraculo:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=mongodb://admin:example@oraculo:27017/oraculo?authSource=admin
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.${SQUAD_NAME}-backend.loadbalancer.server.port=21165
+      - traefik.http.routers.${SQUAD_NAME}-backend-http.rule=Host(`api-${SQUAD_NAME}.qacoders.dev.br`)
+      - traefik.http.routers.${SQUAD_NAME}-backend-http.entrypoints=web
+      - traefik.http.routers.${SQUAD_NAME}-backend-https.tls=true
+      - traefik.http.routers.${SQUAD_NAME}-backend-https.tls.certresolver=letsencrypt
+      - traefik.http.routers.${SQUAD_NAME}-backend-https.entrypoints=websecure
+      - traefik.http.routers.${SQUAD_NAME}-backend-https.rule=Host(`api-${SQUAD_NAME}.qacoders.dev.br`)
+    networks:
+      - traefik
+    mem_limit: 1g
+    cpus: "0.5"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+    restart: always
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "1${PORT}:3000"
+      - "3${PORT}:10050"
+    depends_on:
+      - backend
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${SQUAD_NAME}-frontend-http.rule=Host(`${SQUAD_NAME}.qacoders.dev.br`)
+      - traefik.http.routers.${SQUAD_NAME}-frontend-http.entrypoints=web
+      - traefik.http.routers.${SQUAD_NAME}-frontend-https.tls=true
+      - traefik.http.routers.${SQUAD_NAME}-frontend-https.tls.certresolver=letsencrypt
+      - traefik.http.routers.${SQUAD_NAME}-frontend-https.entrypoints=websecure
+      - traefik.http.routers.${SQUAD_NAME}-frontend-https.rule=Host(`${SQUAD_NAME}.qacoders.dev.br`)
+    networks:
+      - traefik
+    mem_limit: 128m
+    cpus: "0.2"
+
+  oraculo:
+    build:
+      context: ./oraculo
+      dockerfile: dockerfile
+    restart: always
+    ports:
+      - "2${PORT}:27017"
+      - "5${PORT}:10050" 
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - /home/joao_gustavo/oraculo:/data/db
+    networks:
+      - traefik
+    mem_limit: 256m
+    cpus: "0.3"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+networks:
+  traefik:
+    external: true
