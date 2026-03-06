@@ -11,6 +11,7 @@ import { ValidateTokenService } from './service/validateToken.service';
 import { ValidadeController } from './controller/validateToken.controller';
 import { AdminModule } from '../admin/admin.module';
 import { LogoutController } from './controller/Logout.controller';
+import { LoginController } from './controller/Login.controller';
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ import { LogoutController } from './controller/Logout.controller';
     JwtAuthGuard, 
     ValidateTokenService
   ],
-  controllers: [ValidadeController, LogoutController],
+  controllers: [LoginController, ValidadeController, LogoutController],
   exports: [AuthService, JwtModule, JwtAuthGuard],
 })
 export class AuthModule {}
