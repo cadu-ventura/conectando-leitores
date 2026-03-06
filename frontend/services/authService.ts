@@ -8,7 +8,7 @@ export const authService = {
    * Verifica o status da API.
    */
   getStatus: async (): Promise<{ status: string }> => {
-    const response = await fetch(`${API_BASE_URL}/status`);
+    const response = await fetch(`${API_BASE_URL}/api/status`);
     if (!response.ok) {
       throw new Error('A API parece estar offline ou com problemas.');
     }
@@ -19,7 +19,7 @@ export const authService = {
    * Valida um token JWT existente com o backend.
    */
   validateToken: async (token: string): Promise<ApiResponse> => {
-    const response = await fetch(`${API_BASE_URL}/auth/validateToken`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/validateToken`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ export const authService = {
    * Autentica um usuário e retorna um token e dados do usuário.
    */
   login: async (credentials: LoginFormInputs): Promise<LoginResponse> => {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export const authService = {
    * Desloga o usuário no backend, invalidando o token.
    */
   logout: async (token: string): Promise<void> => {
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export const authService = {
    * Cadastra um novo usuário.
    */
   signup: async (data: SignupPayload): Promise<ApiResponse> => {
-    const response = await fetch(`${API_BASE_URL}/user/register`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
