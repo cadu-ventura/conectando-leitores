@@ -57,4 +57,4 @@ ENV NODE_ENV=production
 EXPOSE 21165
 
 # Inicia a aplicação
-CMD ["node", "dist/main"]
+CMD ["node", "dist/src/main"]

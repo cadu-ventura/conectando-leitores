@@ -5,7 +5,7 @@ import { RolesGuard } from "../../auth/guards/roles.guard";
 import { GetBookService } from "../service/getBook.service";
 import { Role } from "../../util/Role";
 import { Roles } from "src/auth/roles.decorator";
-import { ParseObjectIdPipe } from "../../common/pipes/parse-objectid.pipe";
+import { ParseObjectIdPipe } from "common/pipes/parse-objectid.pipe";
 import { Response } from 'express';
 
 @Controller('book')
