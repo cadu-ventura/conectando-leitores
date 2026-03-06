@@ -56,5 +56,5 @@ ENV NODE_ENV=production
 # Expõe a porta
 EXPOSE 21165
 
-# Inicia a aplicação (usa start para executar prestart:prod que faz o seed)
-CMD ["npm", "start"]
+# Inicia o seed e depois a aplicação
+CMD sh -c "node --max-old-space-size=512 ./dist/src/seed/seedAdmin.js && node --max-old-space-size=768 ./dist/src/main"

@@ -8,7 +8,7 @@
   "scripts": {
     "prestart": "node --max-old-space-size=512 --optimize-for-size -r ts-node/register -r tsconfig-paths/register src/seed/seedAdmin.ts",
     "prestart:dev": "node --max-old-space-size=512 --optimize-for-size -r ts-node/register -r tsconfig-paths/register src/seed/seedAdmin.ts",
-    "prestart:prod": "node --max-old-space-size=512 --optimize-for-size dist/src/seed/seedAdmin.js",
+    "prestart:prod": "node --max-old-space-size=512 --optimize-for-size ./dist/src/seed/seedAdmin.js",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "seed-sys": "node --max-old-space-size=512 --optimize-for-size -r ts-node/register -r tsconfig-paths/register src/seed/seedAdmin.ts",
