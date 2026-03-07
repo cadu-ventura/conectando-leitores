@@ -8,7 +8,7 @@ export const userService = {
         token: string | null,
         justification: string,
     ) => {
-        const endpointUrl = `${API_URL}/user/delete/${id}`;
+        const endpointUrl = `${API_URL}/api/user/delete/${id}`;
         try {
             if (!token) throw new Error("Usuário não autenticado");
 
@@ -46,7 +46,7 @@ export const userService = {
         params.append("page", String(page));
         params.append("limit", String(limit));
 
-        const endpointUrl = `${API_URL}/user?${params.toString()}`;
+        const endpointUrl = `${API_URL}/api/user?${params.toString()}`;
 
         try {
             if (!token) throw new Error("Token não fornecido");

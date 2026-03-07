@@ -2,7 +2,7 @@ import type { ApiFavoriteItem, ApiFavoriteListResponse } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const getFavoriteList = async (token: string): Promise<string[]> => {
-  const endpointUrl = `${API_URL}/book/favorite/list?page=1&limit=100`;
+  const endpointUrl = `${API_URL}/api/book/favorite/list?page=1&limit=100`;
   const response = await fetch(endpointUrl, {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` },
@@ -18,7 +18,7 @@ const getFavoriteList = async (token: string): Promise<string[]> => {
 };
 
 const addFavorite = async (bookId: string, token: string): Promise<void> => {
-  const endpointUrl = `${API_URL}/book/favorite/${bookId}`;
+  const endpointUrl = `${API_URL}/api/book/favorite/${bookId}`;
 
   const response = await fetch(endpointUrl, {
     method: 'POST',
@@ -34,7 +34,7 @@ const addFavorite = async (bookId: string, token: string): Promise<void> => {
 };
 
 const removeFavorite = async (bookId: string, token: string): Promise<void> => {
-  const endpointUrl = `${API_URL}/book/favorite/${bookId}`;
+  const endpointUrl = `${API_URL}/api/book/favorite/${bookId}`;
 
   const response = await fetch(endpointUrl, {
     method: 'DELETE',

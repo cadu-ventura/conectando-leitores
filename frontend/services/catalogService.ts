@@ -9,7 +9,7 @@ export const catalogService = {
         query: string,
         token: string,
     ): Promise<BookSearchResponse> => {
-        const externalUrl = `${API_BASE_URL}/book/search?q=${encodeURIComponent(query)}`;
+        const externalUrl = `${API_BASE_URL}/api/book/search?q=${encodeURIComponent(query)}`;
 
         const response = await fetch(externalUrl, {
             method: "GET",

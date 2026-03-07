@@ -2,7 +2,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const pendingBookService = {
     async getPendingBooks(token: string) {
-        const res = await fetch(`${API_URL}/book/pendentes`, {
+        const res = await fetch(`${API_URL}/api/book/pendentes`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export const pendingBookService = {
         status: boolean,
         justification?: string,
     ) {
-        const res = await fetch(`${API_URL}/book/${id}/status`, {
+        const res = await fetch(`${API_URL}/api/book/${id}/status`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

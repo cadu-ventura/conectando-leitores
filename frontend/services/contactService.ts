@@ -10,14 +10,14 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const authService = {
   getStatus: async (): Promise<{ status: string }> => {
-    const response = await fetch(`${API_BASE_URL}/status`);
+    const response = await fetch(`${API_BASE_URL}/api/status`);
     if (!response.ok) {
       throw new Error('A API parece estar offline ou com problemas.');
     }
     return response.json();
   },
   validateToken: async (token: string): Promise<ApiResponse> => {
-    const response = await fetch(`${API_BASE_URL}/auth/validateToken`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/validateToken`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -27,7 +27,7 @@ export const authService = {
     return response.json();
   },
   login: async (credentials: LoginFormInputs): Promise<LoginResponse> => {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
@@ -42,7 +42,7 @@ export const authService = {
     return response.json();
   },
   logout: async (token: string): Promise<void> => {
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export const authService = {
     return;
   },
   signup: async (data: SignupPayload): Promise<ApiResponse> => {
-    const response = await fetch(`${API_BASE_URL}/user/register`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -72,7 +72,7 @@ export const authService = {
     payload: ContactFormPayload,
     token: string,
   ): Promise<ApiResponse> => {
-    const endpoint = `${API_BASE_URL}/user/contact`;
+    const endpoint = `${API_BASE_URL}/api/user/contact`;
 
     console.log('Enviando mensagem de contato para API:', endpoint, payload);
 

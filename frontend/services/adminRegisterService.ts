@@ -4,7 +4,7 @@ export const adminRegisterService = {
   registerAdmin: async (data: AdminRegisterInputs, token: string) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/admin/register`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/register`,
         {
           method: 'POST',
           body: JSON.stringify(data),

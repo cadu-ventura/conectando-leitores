@@ -2,7 +2,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const notificationService = {
     async getAll(token: string) {
-        const response = await fetch(`${API_URL}/notification`, {
+        const response = await fetch(`${API_URL}/api/notification`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export const notificationService = {
         return await response.json();
     },
     async readNotification(id: string, token: string) {
-        const response = await fetch(`${API_URL}/notification/${id}/read`, {
+        const response = await fetch(`${API_URL}/api/notification/${id}/read`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

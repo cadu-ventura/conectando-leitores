@@ -16,7 +16,7 @@ export const bookRegisterService = {
       if (data.cover) formData.append('cover', data.cover);
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/book/upload`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/book/upload`,
         {
           method: 'POST',
           body: formData,

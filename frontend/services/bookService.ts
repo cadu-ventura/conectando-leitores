@@ -45,7 +45,7 @@ export const bookService = {
         const params = new URLSearchParams();
         params.append("page", String(page));
         params.append("limit", String(limit));
-        const endpointUrl = `${API_URL}/book?${params.toString()}`;
+        const endpointUrl = `${API_URL}/api/book?${params.toString()}`;
         try {
             if (!token) {
                 throw new Error(
@@ -76,7 +76,7 @@ export const bookService = {
     getMostFavoritedBooks: async (
         limit: number = 20,
     ): Promise<ApiMostFavoritedResponse> => {
-        const endpointUrl = `${API_URL}/book/favorite/mostFavorite?limit=${limit}`;
+        const endpointUrl = `${API_URL}/api/book/favorite/mostFavorite?limit=${limit}`;
 
         const MAX_RETRIES = 5; // Tentar 5 vezes
         const RETRY_DELAY = 2000; // Esperar 2 segundos (2000ms) entre as tentativas
@@ -126,7 +126,7 @@ export const bookService = {
         };
     },
     deleteBook: async (id: string, token: string | null) => {
-        const endpointUrl = `${API_URL}/book/delete/${id}`;
+        const endpointUrl = `${API_URL}/api/book/delete/${id}`;
         try {
             if (!token) throw new Error("Usuário não autenticado");
 
