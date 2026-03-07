@@ -253,6 +253,9 @@ export class UploadBookService {
         urlLivro = `https://storage.googleapis.com/${bucket.name}/${caminhoLivro}`;
       }
 
+      // Calcula o tamanho ANTES de destruir o buffer
+      const tamanhoLivro = bufferParaSalvar ? bufferParaSalvar.length : 0;
+
       // Libera buffers da memória
       bufferParaSalvar = null as any;
       arquivoLivro.buffer = null as any;
@@ -272,12 +275,12 @@ export class UploadBookService {
         releaseDate: dataLancamento,
         uploadedBy: userId,
         status: statusLivro as StatusLivro,
-        book: { 
+        book: {
           originalName: nomeOriginalFinal,
           storagePath: caminhoLivro,
           storageFileName: nomeUnicoLivro,
           mimeType: mimeTypeFinal,
-          size: bufferParaSalvar ? bufferParaSalvar.length : 0,
+          size: tamanhoLivro,
           checksum: checksum,
           uploadAt: dataUpload,
           cover: capaParaUsar ? {
@@ -314,7 +317,7 @@ export class UploadBookService {
           url: urlLivro,
           originalName: nomeOriginalFinal,
           originalNameUpload: arquivoLivro.originalname,
-          size: bufferParaSalvar ? bufferParaSalvar.length : 0,
+          size: tamanhoLivro,
           type: mimeTypeFinal,
           convertidoDePdf: foiConvertido,
         },
