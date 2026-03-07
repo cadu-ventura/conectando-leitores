@@ -55,11 +55,11 @@ export default function DeleteUserModal({ onConfirm, onCancel }: DeleteModalProp
 
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
                     <div className="flex flex-col">
-                        <label htmlFor="justify" className="text-sm mb-1">
+                        <label htmlFor="user-justify" className="text-sm mb-1">
                             Justificativa*
                         </label>
                         <select
-                            id="justify"
+                            id="user-justify"
                             defaultValue=""
                             {...register("justification")}
                             className={`border rounded-md p-2 focus:outline-primary hover:cursor-pointer ${errors.justification ? "border-red-500" : "border-gray-300"
