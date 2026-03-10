@@ -199,7 +199,7 @@ Para usar upload de arquivos, você precisa de:
 ### 1. Clone o Repositório
 
 ```bash
-git clone https://github.com/Qa-Coders/conectando-leitores.git
+git clone https://github.com/cadu-ventura/conectando-leitores.git
 cd conectando-leitores
 ```
 
@@ -209,7 +209,7 @@ cd conectando-leitores
 ```bash
 # Database
 NODE_ENV=development
-DATABASE_URL=mongodb://admin:example@oraculo:27017/oraculo?authSource=admin
+DATABASE_URL=mongodb://admin:example@teste:27017/teste?authSource=admin
 PORT=21165
 
 # JWT
@@ -695,7 +695,7 @@ Desenvolvido pela comunidade **Qa-Coders**
 - [JoaoGSantiago](https://github.com/JoaoGSantiago)
 
 **QA / Testing**
-- [MatheusVictor01](https://github.com/MatheusVictor01) - QA Tester Funcional
+- [MatheusVictor01](https://github.com/MatheusVictor01) 
 
 ### 🎨 Design
 
