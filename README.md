@@ -88,6 +88,15 @@
 - ✅ **Criação de Admins**: Registrar administradores
 - ✅ **Auditoria**: Gerenciar todo o sistema
 
+### Usuário de Teste 👤
+
+- ✅ **Acesso ao Catálogo**: Visualizar todos os livros disponíveis
+- ✅ **Busca e Filtros**: Procurar livros por título, autor ou categoria
+- ✅ **Leitor EPUB**: Ler livros com suporte a acessibilidade
+- ✅ **Favoritos**: Marcar e gerenciar livros favoritos
+- ✅ **Upload de Livros**: Enviar seus próprios arquivos para aprovação
+- ✅ **Perfil**: Gerenciar dados pessoais
+
 ---
 
 ## 🏗️ Arquitetura
@@ -265,16 +274,16 @@ npm run dev
 
 ## ⚙️ Configuração
 
-### Inicializar Super Admin
+### Usuário de Teste
 
-Na primeira execução, um Super Admin é criado automaticamente:
+Para testar a plataforma, use as seguintes credenciais:
 
 ```
-Email: admin@conectando-leitores.com
-Senha: 1234@Test
+Email: user.test@email.com
+Senha: Senha@123
 ```
 
-**⚠️ Altere essa senha imediatamente em produção!**
+**⚠️ Use credenciais diferentes em produção!**
 
 ### Seed de Dados (Opcional)
 
